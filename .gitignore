@@ -1,0 +1,16 @@
+# Virtual environment
+venv/
+myenv/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# MacOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Pygame specific
+*.pyc
+*.pyo
