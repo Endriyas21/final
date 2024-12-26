@@ -17,6 +17,9 @@ class Game:
         self.gamemode = 'ai'
         self.running = True
         self.CIRCLE_RADIUS = self.SQUARE_SIZE // 3
+        self.CROSS_WIDTH = self.SQUARE_SIZE // 5  
+        self.CIRC_WIDTH = self.SQUARE_SIZE // 10  
+        self.OFFSET = self.SQUARE_SIZE // 4  
         self.show_lines()
 
     def show_lines(self):
@@ -38,16 +41,16 @@ class Game:
         Draw a cross (X) on the board.
         """
         positions = self.calculate_cross_positions(row, col)
-        [pygame.draw.line(self.screen, CROSS_COLOR, start, end, CROSS_WIDTH) for start, end in positions]
+        [pygame.draw.line(self.screen, CROSS_COLOR, start, end, self.CROSS_WIDTH) for start, end in positions]
 
     def calculate_cross_positions(self, row, col):
         """
         Calculate positions for drawing a cross.
         """
-        start_desc = (col * self.SQUARE_SIZE + OFFSET, row * self.SQUARE_SIZE + OFFSET)
-        end_desc = (col * self.SQUARE_SIZE + self.SQUARE_SIZE - OFFSET, row * self.SQUARE_SIZE + self.SQUARE_SIZE - OFFSET)
-        start_asc = (col * self.SQUARE_SIZE + OFFSET, row * self.SQUARE_SIZE + self.SQUARE_SIZE - OFFSET)
-        end_asc = (col * self.SQUARE_SIZE + self.SQUARE_SIZE - OFFSET, row * self.SQUARE_SIZE + OFFSET)
+        start_desc = (col * self.SQUARE_SIZE + self.OFFSET, row * self.SQUARE_SIZE + self.OFFSET)
+        end_desc = (col * self.SQUARE_SIZE + self.SQUARE_SIZE - self.OFFSET, row * self.SQUARE_SIZE + self.SQUARE_SIZE - self.OFFSET)
+        start_asc = (col * self.SQUARE_SIZE + self.OFFSET, row * self.SQUARE_SIZE + self.SQUARE_SIZE - self.OFFSET)
+        end_asc = (col * self.SQUARE_SIZE + self.SQUARE_SIZE - self.OFFSET, row * self.SQUARE_SIZE + self.OFFSET)
         return [(start_desc, end_desc), (start_asc, end_asc)]
 
     def draw_circle(self, row, col):
@@ -55,7 +58,7 @@ class Game:
         Draw a circle (O) on the board.
         """
         center = (col * self.SQUARE_SIZE + self.SQUARE_SIZE // 2, row * self.SQUARE_SIZE + self.SQUARE_SIZE // 2)
-        pygame.draw.circle(self.screen, CIRC_COLOR, center, self.CIRCLE_RADIUS, CIRC_WIDTH)
+        pygame.draw.circle(self.screen, CIRC_COLOR, center, self.CIRCLE_RADIUS, self.CIRC_WIDTH)
 
     def draw_fig(self, row, col):
         """
@@ -117,4 +120,5 @@ class Game:
         Reset the game.
         """
         self.__init__(self.size, self.screen)
+
 # Some parts of the design were inspired by https://www.youtube.com/watch?v=LbTu0rwikwg&t=90s
